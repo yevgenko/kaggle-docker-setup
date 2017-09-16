@@ -5,6 +5,13 @@ Data science in containers
 
 http://blog.kaggle.com/2016/02/05/how-to-get-started-with-data-science-in-containers/
 
+```
+docker-machine create -d virtualbox --virtualbox-disk-size "50000" --virtualbox-cpu-count "4" --virtualbox-memory "8092" kaggle-vbox
+docker-machine start kaggle-vbox
+eval $(docker-machine env kaggle-vbox)
+docker pull kaggle/python
+```
+
 ## Customized container
 
 For example, if you missing some package, modify `kaggle_python_plus/Dockerfile`
@@ -14,10 +21,10 @@ Rebuild image:
     docker rmi kaggle_plython_plus
     docker build -t kaggle_python_plus .
 
-## Zsh helpers with custom container
+## Zsh/Bash helpers with custom container
 
 ```
-# ~/.zshrc
+# ~/.zshrc or ~/.bashrc
 ##
 # Kaggle Containers
 ##
