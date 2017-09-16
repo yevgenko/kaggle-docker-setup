@@ -22,23 +22,26 @@ Rebuild image:
 # Kaggle Containers
 ##
 
-kaggle-machine(){
-  docker-machine start kaggle-vbox
+kaggle-env(){
   eval $(docker-machine env kaggle-vbox)
 }
 
+kaggle-start(){
+  docker-machine start kaggle-vbox
+}
+
 kpython(){
-  kaggle-machine
+  kaggle-env
   docker run -v $PWD:/tmp/working -w=/tmp/working --rm -it kaggle_python_plus python "$@"
 }
 
 ikpython() {
-  kaggle-machine
+  kaggle-env
   docker run -v $PWD:/tmp/working -w=/tmp/working --rm -it kaggle_python_plus ipython
 }
 
 kjupyter() {
-  kaggle-machine
+  kaggle-env
   (sleep 3 && open "http://$(docker-machine ip kaggle-vbox):8888")&
   docker run -v $PWD:/tmp/working -w=/tmp/working -p 8888:8888 --rm -it kaggle_python_plus jupyter notebook --no-browser --ip="0.0.0.0" --notebook-dir=/tmp/working --allow-root
 }
